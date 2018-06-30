@@ -68,6 +68,7 @@ public class BoardController {
 		logger.info("mod post.........");
 		service.modify(board);
 		rttr.addAttribute("msg", "success");
+		
 		return "redirect:/board/listAll";
 	}
 	

@@ -69,7 +69,7 @@ public class BoardController {
 		service.modify(board);
 		rttr.addAttribute("msg", "success");
 		
-		//Git push TEST
+		//Git push TEST,.
 		return "redirect:/board/listAll";
 	}
 	

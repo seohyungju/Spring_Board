@@ -40,5 +40,18 @@ public class BoardDAOImpl implements BoardDAO{
 	public List<BoardVO> listAll() throws Exception {
 		return sqlsession.selectList(namespace+".listAll");
 	}
+
+	@Override
+	public List<BoardVO> listPage(int page) throws Exception {
+		if(page <= 0) {
+			page = 1;
+		}
+		
+		page = (page-1)*10;
+		
+		return sqlsession.selectList(namespace + ".listPage", page);
+	}
+	
+	
 	
 }

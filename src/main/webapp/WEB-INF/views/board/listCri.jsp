@@ -25,7 +25,6 @@
 	</c:forEach>
 	
 </table>
-
 <%@include file="../include/footer.jsp"%>
 
 <script>

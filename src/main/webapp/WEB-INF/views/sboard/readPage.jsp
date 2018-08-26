@@ -58,7 +58,9 @@
 		</div>
 		
 		<ul class="timeline">
-			<li class="time-label" id="repliesDiv"><span class="bg-green">Replies List</span></li>
+			<li class="time-label" id="repliesDiv">
+				<span class="bg-green">Replies List <small id='replycntSmall'> [ ${boardVO.replycnt } ]</small></span>
+			</li>
 		<!-- replies body -->
 		<script id="template" type="text/x-handlebars-template">
 		{{#each.}}
@@ -159,6 +161,7 @@
 			printPaging(data.pageMaker, $(".pagination"));
 			
 			$("#modifyModal").modal('hide');
+			$("#replycntSmall").html("[" + data.pageMaker.totalCount + "]");
 		});
 	}
 	

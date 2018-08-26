@@ -10,7 +10,7 @@
 </insert>
 
 <select id="read" resultType="org.zerock.domain.BoardVO">
-	select bno, title, content, writer, regdate, viewcnt 
+	select bno, title, content, writer, regdate, viewcnt, replycnt 
 	from tbl_board
 	where bno = #{bno}
 </select>
@@ -25,7 +25,8 @@
 
 <select id="listAll" resultType="org.zerock.domain.BoardVO">
 	<![CDATA[
-		select bno, title, content, writer, regdate, viewcnt from tbl_board
+		select bno, title, content, writer, regdate, viewcnt, replycnt 
+		from tbl_board
 		where bno > 0
 		order by bno desc, regdate desc
 	]]>
@@ -33,7 +34,7 @@
 
 <select id="listPage" resultType="org.zerock.domain.BoardVO">
 	<![CDATA[
-		select bno, title, content, writer, regdate, viewcnt 
+		select bno, title, content, writer, regdate, viewcnt, replycnt 
 		from tbl_board
 		where bno > 0
 		order by bno desc, regdate desc
@@ -43,7 +44,7 @@
 
 <select id="listCriteria" resultType="org.zerock.domain.BoardVO">
 	<![CDATA[
-		select bno, title, content, writer, regdate, viewcnt
+		select bno, title, content, writer, regdate, viewcnt, replycnt 
 		from tbl_board
 		where bno > 0
 		order by bno desc, regdate desc
@@ -104,5 +105,13 @@
 		</if>
 	</if>
 </sql>
+
+<update id="updateReplyCnt">
+	update tbl_board set replycnt = replycnt + #{amount} where bno = #{bno}
+</update>
+
+<update id="updateViewCnt">
+	update tbl_board set viewcnt = viewcnt + 1 where bno = #{bno}
+</update>
 
 </mapper>

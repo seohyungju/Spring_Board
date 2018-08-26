@@ -5,6 +5,8 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Transactional;
 import org.zerock.domain.BoardVO;
 import org.zerock.domain.Criteria;
 import org.zerock.domain.SearchCriteria;
@@ -20,9 +22,11 @@ public class BoardServiceImpl implements BoardService{
 	public void regist(BoardVO board) throws Exception {
 		dao.create(board);
 	}
-
+	
+	@Transactional(isolation=Isolation.READ_COMMITTED)
 	@Override
 	public BoardVO read(Integer bno) throws Exception {
+		dao.updateViewCnt(bno);
 		//mybatis xml 의 resultType 이 BoardVO 이기 때문에 형변환 하지 않아도 된다.
 		return dao.read(bno);
 	}

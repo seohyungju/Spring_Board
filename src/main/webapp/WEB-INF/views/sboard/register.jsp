@@ -14,7 +14,7 @@
 					<h3 class="box-title">REGISTER BOARD</h3>
 				</div>
 				<!-- /.box-header -->
-				<form role="form" method="post">
+				<form role="form" method="post" id="registerForm">
 					<div class="box-body">
 						<div class="form-group">
 							<label for="exampleInputEmail1">Title</label> 
@@ -132,7 +132,7 @@ margin:auto;
 		});
 		
 		that.append(str);
-		/* that.get(0).submit(); */
+		that.get(0).submit();
 	});
 	
 </script>

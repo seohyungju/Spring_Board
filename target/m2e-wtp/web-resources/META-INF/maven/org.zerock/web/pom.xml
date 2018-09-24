@@ -179,6 +179,13 @@
 			<version>1.3.2</version>
 		</dependency>
 		
+		<!-- transaction -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-tx</artifactId>
+			<version>${org.springframework-version}</version>
+		</dependency>
+		
 	</dependencies>
 	<build>
 		<plugins>

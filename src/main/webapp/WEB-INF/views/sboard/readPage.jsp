@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@include file="../include/header.jsp"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <script type="text/javascript" src="/resources/js/upload.js"></script>
 <style type="text/css">
 	.popup{position:absolute;}
@@ -68,9 +70,12 @@
 						</ul>
 
 <div class="box-footer">
-	<button type="submit" class="btn btn-warning modifyBtn">Modify</button>
-	<button type="submit" class="btn btn-danger removeBtn">REMOVE</button>
-	<button type="submit" class="btn btn-primary goListBtn">GO LIST</button>
+	<!-- 자신의 글에서만 수정과 삭제가 가능 -->
+	<c:if test="${login.uid == boardVO.writer}">
+		<button type="submit" class="btn btn-warning modifyBtn">Modify</button>
+		<button type="submit" class="btn btn-danger removeBtn">REMOVE</button>
+	</c:if>
+		<button type="submit" class="btn btn-primary goListBtn">GO LIST</button>
 </div>
 
 <form role="form" action="modifyPage" method="post">
@@ -86,9 +91,10 @@
 				<h3 class="box-title">ADD NEW REPLY</h3>
 			</div>
 			
+			<c:if test="${not empty login}">
 			<div class="box-body">
 				<label for="newReplyWriter">Writer</label>
-					<input class="form-control" type="text" placeholer="USER ID" id="newReplyWriter">
+					<input class="form-control" type="text" placeholder="USER ID" id="newReplyWriter">
 				<label for="newReplyText">ReplyText</label>
 					<input class="form-control" type="text" placeholder="REPLY TEXT" id="newReplyText">
 			</div>
@@ -96,7 +102,15 @@
 			<div class="box-footer">
 				<button type="submit" class="btn btn-primary" id="replyAddBtn">ADD REPLY</button>
 			</div>
+			</c:if>
+			
+			<c:if test="${empty login}">
+				<div class="box-body">
+					<div><a href="javascript:goLogin();">Login Please</a></div>
+				</div>
+			</c:if>
 		</div>
+		
 		
 		<ul class="timeline">
 			<li class="time-label" id="repliesDiv">

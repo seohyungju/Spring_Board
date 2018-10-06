@@ -94,7 +94,7 @@
 			<c:if test="${not empty login}">
 			<div class="box-body">
 				<label for="newReplyWriter">Writer</label>
-					<input class="form-control" type="text" placeholder="USER ID" id="newReplyWriter">
+					<input class="form-control" type="text" placeholder="USER ID" id="newReplyWriter" value="${login.uid}" readonly="readonly">
 				<label for="newReplyText">ReplyText</label>
 					<input class="form-control" type="text" placeholder="REPLY TEXT" id="newReplyText">
 			</div>
@@ -128,7 +128,9 @@
 				<h3 class="timeline-header"><strong>{{rno}}</strong> - {{replyer}}</h3>
 				<div class="timeline-body">{{replytext}}</div>
 				<div class="timeline-footer">
+				{{#eqReplyer replyer}}
 					<a class="btn btn-primary btn-xs" data-toggle="modal" data-target="#modifyModal">Modify</a>
+				{{/eqReplyer replyer}}
 				</div>
 			</div>
 		</li>
@@ -218,6 +220,10 @@
 			$("#modifyModal").modal('hide');
 			$("#replycntSmall").html("[" + data.pageMaker.totalCount + "]");
 		});
+	}
+	
+	function goLogin(){
+		self.location= "/user/login"
 	}
 	
 	var printPaging = function(pageMaker, target){
@@ -394,6 +400,14 @@
 		
 		formObj.attr("action", "/sboard/removePage");
 		formObj.submit();
+	});
+	
+	Handlebars.registerHelper("eqReplyer", function(replyer, block){
+		var accum = '';
+		if(replyer == '${login.uid}'){
+			accum += block.fn();
+		}
+		return accum;
 	});
 	
 </script>
